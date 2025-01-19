@@ -1,0 +1,238 @@
+---
+title: Lab2 - Basic C Programming Language
+lastUpdated: 2025-01-19
+---
+import { Image } from 'astro:assets';
+import { Steps, Card, Tabs, TabItem, LinkButton } from "@astrojs/starlight/components";
+// import im1 from '/cos3105/images/lab2/new_vm.png';
+
+<LinkButton href={"/cos1101/print/lab2"} icon="seti:pdf" target={"_blank"}>Print</LinkButton>
+
+
+
+## รูปแบบของโปรแกรมที่จะเรียนในวิชานี้
+
+- **เป็นรูปแบบ Command Line Interface**
+
+<img src="/cos1101/images/lab2/cli.png" class="h-[200px] shadow-md shadow-slate-500/50 mb-2"/>
+
+
+## โครงสร้างโปรแกรมภาษา C
+
+โดยดูจาก Code ด้านล่าง จะแบ่งเป็น
+
+1. Preprocessor Directive
+2. Main Function
+3. Statement
+
+```c 
+#include <stdio.h> // 1. Preprocessor Directive
+
+int main(){  // 2. Main Function
+    printf("Hello World!"); // 3. Statement
+    return 0; // Statement
+}
+```
+
+**OUTPUT**
+
+
+```
+
+Hello World
+
+```
+
+### ตัวอย่างโปรแกรม เขียนภาษา C Online ได้เลย
+
+- [https://onlinegdb.com/AD3bU_HX0](https://onlinegdb.com/AD3bU_HX0)
+- กดปุ่ม <div class="bg-green-500 px-2 py-1 w-14 inline"> Fork this</div>
+
+
+
+### โจทย์
+
+1. ลองเปลี่ยนจาก Hello World เป็น Hello Student!
+    - เปลี่ยนเสร็จแล้วกดปุ่ม <div class="bg-green-500 px-2 py-1 w-14 inline"><material-symbols-play-arrow-rounded /> Run</div>
+
+
+```c
+#include <stdio.h> 
+
+int main(){  
+    printf("Hello Student!"); 
+    return 0;
+}
+```
+
+2. ลองเปลี่ยนจาก Hello World เป็นรหัสนักศึกษา
+    - เปลี่ยนเสร็จแล้วกดปุ่ม <div class="bg-green-500 px-2 py-1 w-14 inline"><material-symbols-play-arrow-rounded /> Run</div>
+
+```c
+#include <stdio.h> 
+
+int main(){  
+    printf("46270304"); // Student Id 
+    return 0;
+}
+```
+
+
+
+## Preprocessor Directive
+
+:::caution[ทุกโปรแกรมต้องมี]
+:::
+
+- ใช้เรียกไฟล์ที่โปรแกรมใช้ในการทำงานร่วมกัน
+- ใช้กำหนดเงื่อนไขในการคอมไพล์ให้กับโปรแกรม
+- Preprocessor Directives พื้นฐานทั่วไปที่นิยมใช้
+    - <div class="text-red-500 inline font-bold"> #include </div> - ใช้สำหรับเรียกไฟล์ที่โปรแกรมใช้ในการทำงาน
+
+
+- ไม่ได้สอนในวิชานี้
+
+    - #define
+    - #undef
+    - #if
+    - #ifdef
+    - #ifndef
+    - #else
+    - #elif
+    - #endif
+    - #line 
+    - #error
+    - #pragma
+
+
+### การใช้ #include
+
+**วิธีการใช้งาน**
+
+```c 
+#include <ชื่อไฟล์>  // จะเรียกไฟล์ใน directory ที่กำหนดโดยตัวคอมไพล์เลอร์
+// OR
+#include "ชื่อไฟล์" // จะเรียกไฟล์ใน directory ทีทำงานอยู่ในปัจจุบัน
+```
+
+**ตัวอย่าง**
+
+```c
+#include <stdio.h>  // (เป็นการเรียกใช้ไฟล์ stdio.h เข้ามาในโปรแกรม)
+
+#include "mypro.h" // (เป็นการเรียกใช้ไฟล์ mypro.h เข้ามาในโปรแกรม)
+
+```
+
+
+## ฟังก์ชันหลักของโปรแกรม (Main Function)
+
+:::caution[ทุกโปรแกรมต้องมี]
+โดยโปรแกรมหลักจะเริ่มต้นด้วย main() และตามด้วยเครื่องหมาย
+
+ ปีกกาเปิด `{` และปีกกาปิด `}`
+
+```c {2, 4}
+int main()
+{
+    return 0;
+}
+```
+:::
+
+- แต่ละคำสั่ง (Statement) จะต้องจบด้วยเซมิโคลอน `;` (Semicolon)
+- ต้องมี return 0; เสมอ และต้องใส่เลขจำนวนเต็ม เช่น 0 = Success , 1 = Failure 
+
+```c
+return 0; // Success
+return 1; // Failure
+```
+
+## ฟังก์ชั่นพิมพ์ข้อความบนหน้าจอ (printf)
+
+- เป็นคำสั่งที่ใช้ในการแสดงผลออกทางจอภาพ โดยมีรูปแบบการใช้งานดังนี้
+    - control หรือ format string
+         เป็นส่วนที่ใส่ข้อความที่จะแสดงผล และส่วนควบคุมลักษณะการแสดงผล รวมทั้งบอกตำแหน่งที่ตัวแปรจะแสดงผล
+    
+    - variable list
+         เป็นตัวแปรที่ต้องการจะแสดงผล ในกรณีที่ต้องการแสดงข้อความ 
+    ไม่จำเป็นต้องมีส่วนนี้
+
+```c
+printf("ข้อความ หรือ control หรือ format string", variable list );
+
+```
+
+### ตัวอย่าง 2
+
+```c
+#include <stdio.h> 
+
+int main(){  
+    printf("Hello Ramkamhaeng University"); 
+    printf("Department of Computer Science"); 
+    return 0;
+}
+```
+
+**OUTPUT**
+
+```
+Hello Ramkamhaeng UniversityDepartment of Computer Science
+```
+
+- จะให้ข้อความไม่ติดกันแบบนี้จะทำยังไง?
+
+```
+Hello Ramkamhaeng University
+Department of Computer Science
+```
+
+
+## การใช้อักขระควบคุมการแสดงผล
+
+
+
+- คำสั่ง `printf( )` สามารถควบคุมการแสดงผล ด้วยอักขระที่มี backslash นำหน้า
+
+|คำสั่ง|ความหมาย|
+|-|-|
+|\n|ขึ้นบรรทัดใหม่|
+|\t|เว้นระยะ 1 tab |
+|\\|แสดง \\|
+|\"|แสดง "|
+
+**CODE**
+
+```c
+#include <stdio.h>
+int main(){
+    printf("Hello Ramkamhaeng University\n");
+    printf("Department of Computer Science");
+    return 0;
+}
+
+```
+
+**OUTPUT**
+
+```
+Hello Ramkamhaeng University
+Department of Computer Science
+```
+
+
+
+
+### โจทย์ 2
+
+- เขียนโปรแกรมให้แสดงข้อความดังนี้ (เอาให้ใกล้เคียง ไม่ต้องเป๊ะมาก)
+
+```
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+\\  Hello, Krit Chomaitong  \\
+\\  Ramkamhaeng University  \\
+\\  Computer Science        \\
+\\  "46270304"              \\
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+```

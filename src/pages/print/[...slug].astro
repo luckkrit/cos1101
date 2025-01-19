@@ -1,0 +1,26 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import {Content as Lab2} from '../../content/docs/labs/lab2.mdx'
+export async function getStaticPaths() {
+
+  return [{
+    params: {slug:'lab2'},
+    props: {Data:Lab2}
+  }]
+}
+const { slug} = Astro.params;
+const { Data } = Astro.props;
+---
+<style is:global>
+    .header {
+        display: none;
+    }
+</style>
+
+<StarlightPage frontmatter={{title: slug, template: 'splash'}}>
+  <Data/>
+</StarlightPage>
+
+<script>
+  window.print();
+</script>

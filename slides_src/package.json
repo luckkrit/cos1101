@@ -1,0 +1,23 @@
+{
+  "name": "slides_src",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export",
+    "build_lab2": "slidev build --base /cos1101/slides/lab2 --out ../public/slides/lab2"
+  },
+  "dependencies": {
+    "@slidev/cli": "^51.0.1",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@iconify-json/material-symbols": "^1.2.12",
+    "@iconify-json/mdi": "^1.2.2",
+    "qrcode.vue": "^3.6.0",
+    "unplugin-icons": "^22.0.0"
+  }
+}
