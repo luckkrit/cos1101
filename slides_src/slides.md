@@ -6,5 +6,5 @@ theme: seriph
 background: https://cover.sli.dev
 fonts:
     sans: Sarabun
-src: ./pages/lab2.md
+src: ./pages/chapter8.md
 ---
