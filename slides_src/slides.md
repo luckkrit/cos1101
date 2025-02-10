@@ -6,5 +6,6 @@ theme: seriph
 background: https://cover.sli.dev
 fonts:
     sans: Sarabun
-src: ./pages/chapter8.md
+titleTemplate: '%s - COS1101'
+src: ./pages/chapter11_12.md
 ---
