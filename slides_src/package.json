@@ -8,8 +8,9 @@
     "export": "slidev export",
     "export_chapter5": "slidev export --with-clicks --format pptx --output chapter5",
     "export_chapter7": "slidev export --with-clicks --format pptx --output slides-export/chapter7",
+    "export_chapter8": "slidev export --with-clicks --format pptx --output slides-export/chapter8",
     "export_lab_c_1": "slidev export --with-clicks --format pptx --output lab_c_1",
-    "export_lab_c_2": "slidev export --with-clicks --format pptx --output lab_c_2",
+    "export_lab_c_2": "slidev export --with-clicks --format pptx --output slides-export/lab_c_2",
     "build_chapter5": "slidev build --base /cos1101/slides/chapter5 --out ../public/slides/chapter5",
     "build_lab_c_1": "slidev build --base /cos1101/slides/lab_c_1 --out ../public/slides/lab_c_1",
     "build_lab_c_2": "slidev build --base /cos1101/slides/lab_c_2 --out ../public/slides/lab_c_2"
@@ -21,10 +22,11 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@iconify-json/material-symbols": "^1.2.12",
-    "@iconify-json/mdi": "^1.2.2",
+    "@iconify-json/bi": "^1.2.2",
+    "@iconify-json/material-symbols": "^1.2.14",
+    "@iconify-json/mdi": "^1.2.3",
     "playwright-chromium": "^1.50.1",
     "qrcode.vue": "^3.6.0",
-    "unplugin-icons": "^22.0.0"
+    "unplugin-icons": "^22.1.0"
   }
 }
