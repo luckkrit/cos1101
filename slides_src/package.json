@@ -9,14 +9,18 @@
     "export_chapter5": "slidev export --with-clicks --format pptx --output chapter5",
     "export_chapter7": "slidev export --with-clicks --format pptx --output slides-export/chapter7",
     "export_chapter8": "slidev export --with-clicks --format pptx --output slides-export/chapter8",
+    "export_chapter9_10": "slidev export --with-clicks --format pptx --output slides-export/chapter9_10",
+    "export_chapter11_12": "slidev export --with-clicks --format pptx --output slides-export/chapter11_12",
+    "export_chapter13_14": "slidev export --with-clicks --format pptx --output slides-export/chapter13_14",
     "export_lab_c_1": "slidev export --with-clicks --format pptx --output lab_c_1",
     "export_lab_c_2": "slidev export --with-clicks --format pptx --output slides-export/lab_c_2",
+    "export_lab_c_3": "slidev export --with-clicks --format pptx --output slides-export/lab_c_3",
     "build_chapter5": "slidev build --base /cos1101/slides/chapter5 --out ../public/slides/chapter5",
     "build_lab_c_1": "slidev build --base /cos1101/slides/lab_c_1 --out ../public/slides/lab_c_1",
     "build_lab_c_2": "slidev build --base /cos1101/slides/lab_c_2 --out ../public/slides/lab_c_2"
   },
   "dependencies": {
-    "@slidev/cli": "^51.1.0",
+    "@slidev/cli": "^51.0.1",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "vue": "^3.5.13"
@@ -25,7 +29,7 @@
     "@iconify-json/bi": "^1.2.2",
     "@iconify-json/material-symbols": "^1.2.14",
     "@iconify-json/mdi": "^1.2.3",
-    "playwright-chromium": "^1.50.1",
+    "playwright-chromium": "^1.49.1",
     "qrcode.vue": "^3.6.0",
     "unplugin-icons": "^22.1.0"
   }

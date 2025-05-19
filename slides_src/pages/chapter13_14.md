@@ -50,9 +50,9 @@ F[Hashed File]
 
 A --> B
 A --> C
-C --> D
-B --> E
-B --> F
+B --> D
+C --> E
+C --> F
 
 ```
 </div>
@@ -87,7 +87,7 @@ layout: two-cols
 layout: two-cols
 ---
 
-# แฟ้มข้อมูลลำดับ (2)
+# การเข้าถึงแฟ้มข้อมูลแบบลำดับ
 
 - แฟ้มข้อมูลแบบลำดับใช้กับการประยุกต์ที่ต้องการเข้าถึงเรคคอร์ดทั้งหมดจากเรคคอร์ดแรกจนถึงเรคคอร์ดสุดท้าย เช่นในแฟ้มข้อมูลพนักงานโดยทั่วไป 
 - ตอนสิ้นเดือนที่มีการประมวลผลเงินเดือน ทุกๆเรคคอร์ดที่แทนข้อมูลพนักงานจะต้องถูกเข้าถึงเพื่อประมวลผลตามลำดับ 
@@ -111,7 +111,7 @@ layout: two-cols
 layout: two-cols
 ---
 
-# แฟ้มข้อมูลลำดับ (3)
+# การเข้าถึงแฟ้มข้อมูลแบบลำดับ (2)
 
 - อย่างไรก็ตาม แฟ้มข้อมูลแบบลำดับไม่เหมาะสำหรับการเข้าถึงแบบสุ่ม 
 - นั่นคือหากเราต้องการเข้าถึงเรคคอร์ดใดเรคคอร์ดหนึ่งโดยเฉพาะ เช่นถ้าข้อมูลลูกค้าของธนาคารจัดเก็บในแฟ้มข้อมูลแบบลำดับ เมื่อลูกค้าไปกด ATM เพื่อถอนเงิน ลูกค้าจะต้องรอให้ระบบทำการอ่านและตรวจสอบเรคคอร์ดทั้งหมดที่อยู่ก่อนหน้าเรคคอร์ดลูกค้าคนนั้น 
@@ -179,7 +179,7 @@ layout: two-cols
 
 <div>
 
-<div class="text-center text-2xl font-bold">การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ</div>
+<div class="text-center text-2xl font-bold">กระบวนการแก้ไขปรับปรุง</div>
 
 ![change sequential file2](/images/chapter13/change_sequential_file2.png)
 </div>
@@ -190,7 +190,7 @@ layout: two-cols
 layout: two-cols
 ---
 
-# การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ (2)
+# การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ (3)
 
 3. Transaction File: เป็นแฟ้มข้อมูลที่เก็บรายการที่จะทำการเปลี่ยนแปลงกับ master file ซึ่งกระบวนการปรับปรุงใดๆ จะใช้คีย์ (key) ในการค้นหาเรคคอร์ดของ master file
 โดยปกติการปรับปรุง master file มี 3 รูปแบบคือ
@@ -205,7 +205,7 @@ layout: two-cols
 
 <div>
 
-<div class="text-center text-2xl font-bold">การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ</div>
+<div class="text-center text-2xl font-bold">กระบวนการแก้ไขปรับปรุง</div>
 
 ![change sequential file2](/images/chapter13/change_sequential_file2.png)
 </div>
@@ -231,7 +231,7 @@ layout: two-cols
 
 <div>
 
-<div class="text-center text-2xl font-bold">การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ</div>
+<div class="text-center text-2xl font-bold">การจับคู่ในแฟ้มข้อมูลดัชนี</div>
 
 
 ![index file](/images/chapter13/index_file.png)
@@ -269,7 +269,8 @@ layout: two-cols
 
 <div>
 
-<div class="text-center text-2xl font-bold">การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ</div>
+<div class="text-center text-2xl font-bold">การจับคู่ใน hashed file
+</div>
 
 
 ![hashed file](/images/chapter11/hash_file.png)
@@ -290,7 +291,8 @@ layout: two-cols
 
 <div>
 
-<div class="text-center text-2xl font-bold">การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ</div>
+<div class="text-center text-2xl font-bold">Direct hashing
+</div>
 
 
 
@@ -311,7 +313,8 @@ layout: two-cols
 
 <div>
 
-<div class="text-center text-2xl font-bold">การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ</div>
+<div class="text-center text-2xl font-bold">Direct hashing
+</div>
 
 
 
@@ -340,11 +343,13 @@ layout: two-cols
 
 <div>
 
-<div class="text-center text-2xl font-bold">การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ</div>
+<div class="text-center text-2xl font-bold">Modulo division
+
+</div>
 
 
 
-![direct hashing](/images/chapter13/direct_hashing.png)
+![modulo hashging](/images/chapter13/modulo_hashing.png)
 </div>
 
 ---
@@ -356,8 +361,7 @@ layout: two-cols
 <div class="">
 
 - ตัวอย่าง: สมมติว่าท่านก่อตั้งบริษัทขนาดเล็กที่วางแผนว่าในอนาคตจะมีพนักงานมากกว่า 100 คน ท่านอาจวางแผนล่วงหน้าโดยกำหนดให้เลขที่พนักงานสามารถรองรับพนักงานได้ถึง 1 ล้านคน ในอนาคตอันใกล้ท่าน ตัดสินใจที่จะเตรียมที่ไว้สำหรับพนักงาน 300 คน เลขจำนวนเฉพาะตัวแรกที่มากกว่า 300 คือ 307 ดังนั้นท่านควรเลือกขนาดของแฟ้มข้อมูลเท่ากับ 307 ตัวอย่างแฟ้มข้อมูลแสดงในรูป ในกรณีนี้ Vu Nguyen ที่มีคีย์เท่ากับ 121267 ถูกแฮชไปเก็บยังตำแหน่ง 003 เพราะ <div class="text-red-500 inline-block">121267 DIV 307 +1 = 3 </div> ซึ่งตรงกับตำแหน่งที่อยู่ 003
-
-
+- [จำนวนเฉพาะ 1 - 1000 https://byjus.com/maths/prime-numbers-from-1-to-1000/](https://byjus.com/maths/prime-numbers-from-1-to-1000/)
 </div>
 
 
@@ -366,11 +370,13 @@ layout: two-cols
 
 <div>
 
-<div class="text-center text-2xl font-bold">การปรับปรุงแก้ไขข้อมูลในแฟ้มข้อมูลลำดับ</div>
+<div class="text-center text-2xl font-bold">Modulo division
+
+</div>
 
 
 
-![direct hashing](/images/chapter13/direct_hashing.png)
+![modulo hashging](/images/chapter13/modulo_hashing.png)
 </div>
 
 
@@ -402,7 +408,7 @@ layout: two-cols
 layout: two-cols
 ---
 
-# วิธีการคำนวณหาตำแหน่งที่อยู่ (5)
+# การชนกัน (Collision)
 
 - โดยทั่วไปแล้ว จำนวนคีย์ที่ทำการแฮชจะมีมากกว่าจำนวนเรคคอร์ดในแฟ้มข้อมูล ตัวอย่างเช่นถ้าเรามีแฟ้มข้อมูลของนักศึกษาจำนวน 50 คน โดยที่นักศึกษาแต่ละคนใช้คีย์เป็นเลขสี่ตัวสุดท้ายของเลขประจำตัวประชาชน (มีค่าได้ตั้งแต่ 0000-9999 จำนวน 10,000 ตัว) ดังนั้นจะมี 200 คีย์ (10000/50) ที่เป็นไปได้สำหรับแต่ละตำแหน่งที่อยู่ภายในแฟ้มข้อมูล (ซึ่งมีอยู่ 50 ตำแหน่งเท่านั้น) เนื่องจากมีคีย์หลายคีย์ต่อหนึ่ง address ในแฟ้มข้อมูล เราเรียกกลุ่มของคีย์ที่แฮชไปยัง address เดียวกันว่าเป็นคีย์ที่ synonym กัน เหตุการณ์ที่คีย์ชนกันแสดงอยู่ในรูป
 
@@ -522,7 +528,7 @@ layout: two-cols
 </div>
 
 ---
-layout: section
+layout: cover
 ---
 
 # ฐานข้อมูลเบื้องต้น

@@ -923,7 +923,7 @@ layout: two-cols
 
 <div class="mx-auto w-[400px]">
 
-<div class="text-center font-bold text-2xl">การ Enqueue</div>
+<div class="text-center font-bold text-2xl">การ Dequeue</div>
 
 ![dequeue](/images/chapter11/dequeue.png)
 
