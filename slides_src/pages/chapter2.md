@@ -1031,4 +1031,12 @@ $$
 
 ---
 
-<OctalToHex/>
+- แปลง (4116)<sub>8</sub> เป็นฐาน 16
+
+<OctalToHex input="4116" from="8" to="16" />
+
+---
+
+- แปลง (472.35)<sub>8</sub> เป็นฐาน 16
+
+<OctalToHex input="472.35" from="8" to="16" />

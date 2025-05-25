@@ -23,53 +23,47 @@ function splitIntoChunksFromLeft(str: string, chunkSize = 3): string[][] {
 
     return [...chunks];
 }
-function splitIntoChunks(str: string, chunkSize = 3): string[][] {
+function splitIntoChunks(str: string, from: number, chunkSize = 3): string[][] {
     const results: string[][][] = []
     if (str.includes('.')) {
-        if (str.split('.').length == 2) {
+        const integral = str.split('.')[0]
+        const fractional = str.split('.')[1]
+        results.push(splitIntoChunksFromRight(integral, chunkSize))
+        results.push(splitIntoChunksFromLeft(fractional, chunkSize))
+        if (from == 2) {
 
-            const integral = str.split('.')[0]
-            const fractional = str.split('.')[1]
-            results.push(splitIntoChunksFromRight(integral, chunkSize))
-            results.push(splitIntoChunksFromLeft(fractional, chunkSize))
-            if (props.from == 2) {
-
-                for (let i = 0; i < results[0].length; i++) {
-                    let chunk = results[0][i]
-                    if (chunk.length < chunkSize) {
-                        let l = chunkSize - chunk.length;
-                        for (let j = 0; j < l; j++) {
-                            chunk.unshift('0')
-                        }
-                    }
-                }
-                for (let i = 0; i < results[1].length; i++) {
-
-                    let chunk = results[1][i]
-                    if (chunk.length < chunkSize) {
-                        let l = chunkSize - chunk.length;
-                        for (let j = 0; j < l; j++) {
-                            chunk.push('0')
-                        }
+            for (let i = 0; i < results[0].length; i++) {
+                let chunk = results[0][i]
+                if (chunk.length < chunkSize) {
+                    let l = chunkSize - chunk.length;
+                    for (let j = 0; j < l; j++) {
+                        chunk.unshift('0')
                     }
                 }
             }
-            results.splice(1, 0, [['.']]);
+            for (let i = 0; i < results[1].length; i++) {
+
+                let chunk = results[1][i]
+                if (chunk.length < chunkSize) {
+                    let l = chunkSize - chunk.length;
+                    for (let j = 0; j < l; j++) {
+                        chunk.push('0')
+                    }
+                }
+            }
         }
+        results.splice(1, 0, [['.']]);
         return results.flat();
     } else {
 
         const results = splitIntoChunksFromRight(str, chunkSize);
-        if (props.from == 2) {
-            if (results.length == 1) {
-
-                for (let i = 0; i < results[0].length; i++) {
-                    let chunk = results[0]
-                    if (chunk.length < chunkSize) {
-                        let l = chunkSize - chunk.length;
-                        for (let j = 0; j < l; j++) {
-                            chunk.unshift('0')
-                        }
+        if (from == 2) {
+            for (let i = 0; i < results[0].length; i++) {
+                let chunk = results[0]
+                if (chunk.length < chunkSize) {
+                    let l = chunkSize - chunk.length;
+                    for (let j = 0; j < l; j++) {
+                        chunk.unshift('0')
                     }
                 }
             }
@@ -92,25 +86,21 @@ const props = defineProps({
     to: {
         default: 16
     },
-    chunkFrom: {
-        default: 4
-    },
-    chunkTo: {
-        default: 4
-    }
 })
 
 
-const inputChunks = splitIntoChunks(props.input, props.chunkFrom)
-const outputChunks: string[][] = []
+const chunkFrom = props.from == 8 ? 3 : 4
+const chunkTo = props.to == 8 ? 3 : 4
+const inputChunks = splitIntoChunks(props.input, props.from, chunkFrom)
+let outputChunks: string[][] = []
 
 inputChunks.forEach((chunk) => {
     if (chunk.join('') !== '.') {
 
-        let convert = parseInt(chunk.join(''), props.from).toString(props.to).toUpperCase()
+        let convert = parseInt(chunk.join(''), props.from).toString(2).toUpperCase()
         if (props.to == 2) {
-            if (convert.length < props.chunkTo) {
-                const l = props.chunkTo - convert.length
+            if (convert.length < chunkTo) {
+                const l = chunkTo - convert.length
                 for (let i = 0; i < l; i++) {
                     convert = '0' + convert;
                 }
@@ -121,73 +111,76 @@ inputChunks.forEach((chunk) => {
         outputChunks.push(chunk)
     }
 })
+console.log("r", outputChunks.flat().join(''))
+const outputChunks2: string[][] = []
 
+outputChunks.forEach((chunk) => {
+    if (chunk.join('') !== '.') {
+
+        let convert = parseInt(chunk.join(''), 2).toString(2).toUpperCase()
+        if (convert.length < chunkTo) {
+            const l = chunkTo - convert.length
+            for (let i = 0; i < l; i++) {
+                convert = '0' + convert;
+            }
+        }
+        outputChunks2.push([...convert])
+    } else {
+        outputChunks2.push(chunk)
+    }
+})
+const outputS = outputChunks2.flat().join('')
+outputChunks = splitIntoChunks(outputS, 2, 4)
+// console.log("r", outputChunks)
+
+const base2 = inputChunks
+const baseOutput: string[][] = []
+const base2Chunks: string[] = outputChunks.flat()
+const count = chunkFrom - 2
+const count2 = chunkTo - 2
+console.log(base2, base2Chunks)
+// console.log(inputChunks, base2Chunks, outputChunks, count)
 
 </script>
 
 <template>
-    <div class="flex flex-col items-end w-fit">
-        <!-- Line -->
-        <div class="flex">
-            <div class="flex flex-col items-center">
-                <NumberBox number="1" />
-                <div class="flex">
-                    <div class="h-10 border-l">&nbsp;</div>
-                </div>
-                <div class="flex">
-                    <div class="size-10 border-0 border-t border-l">&nbsp;</div>
-                    <div class="size-10 border-0 border-t">&nbsp;</div>
-                    <div class="size-10 border-0 border-t border-r">&nbsp;</div>
-                </div>
+    <div class="flex justify-center my-2">
+        <div class="flex flex-col items-center w-fit">
+            <!-- Line -->
+            <div class="flex">
+                <template v-for="(chunks, index) in inputChunks" :key="index">
+                    <div class="flex flex-col items-center" v-for="(chunk, index2) in chunks" :key="index2">
+                        <NumberBox :number="chunk" input="true" />
+                        <div class="flex">
+                            <div class="h-10 border-l">&nbsp;</div>
+                        </div>
+                        <div class="flex">
+                            <div class="size-10 border-0 border-t border-l">&nbsp;</div>
+                            <div class="size-10 border-0 border-t" v-for="n in count" :key="n">&nbsp;</div>
+                            <div class="size-10 border-0 border-t border-r">&nbsp;</div>
+                        </div>
+                    </div>
+                </template>
             </div>
-            <div class="flex flex-col items-center">
-                <NumberBox number="1" />
-                <div class="flex">
-                    <div class="h-10 border-l">&nbsp;</div>
-                </div>
-                <div class="flex">
-                    <div class="size-10 border-0 border-t border-l">&nbsp;</div>
-                    <div class="size-10 border-0 border-t">&nbsp;</div>
-                    <div class="size-10 border-0 border-t border-r">&nbsp;</div>
-                </div>
+            <!-- Numbers -->
+            <div class="flex">
+                <NumberBox v-for="(chunk, index) in base2Chunks" :key="index" :number="chunk" />
             </div>
-        </div>
-        <!-- Numbers -->
-        <div class="flex">
-            <NumberBox number="1" />
-            <NumberBox number="1" />
-            <NumberBox number="1" />
-            <NumberBox number="1" />
-            <NumberBox number="0" />
-            <NumberBox number="0" />
-            <NumberBox number="0" />
-            <NumberBox number="0" />
-        </div>
-        <!-- Line -->
-        <div class="flex">
-            <div class="flex flex-col items-center">
-                <div class="flex">
-                    <div class="size-10 border-0 border-b border-l">&nbsp;</div>
-                    <div class="size-10 border-0 border-b">&nbsp;</div>
-                    <div class="size-10 border-0 border-b">&nbsp;</div>
-                    <div class="size-10 border-0 border-b border-r">&nbsp;</div>
-                </div>
-                <div class="flex">
-                    <div class="h-10 border-l">&nbsp;</div>
-                </div>
-                <NumberBox number="1" />
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="flex">
-                    <div class="size-10 border-0 border-b border-l">&nbsp;</div>
-                    <div class="size-10 border-0 border-b">&nbsp;</div>
-                    <div class="size-10 border-0 border-b">&nbsp;</div>
-                    <div class="size-10 border-0 border-b border-r">&nbsp;</div>
-                </div>
-                <div class="flex">
-                    <div class="h-10 border-l">&nbsp;</div>
-                </div>
-                <NumberBox number="1" />
+            <!-- Line -->
+            <div class="flex">
+                <template v-for="(chunks, index) of outputChunks" :key="index">
+                    <div class="flex flex-col items-center" v-for="(chunk, index2) of chunks" :key="index2">
+                        <div class="flex">
+                            <div class="size-10 border-0 border-b border-l">&nbsp;</div>
+                            <div class="size-10 border-0 border-b" v-for="n in count2" :key="n">&nbsp;</div>
+                            <div class="size-10 border-0 border-b border-r">&nbsp;</div>
+                        </div>
+                        <div class="flex">
+                            <div class="h-10 border-l">&nbsp;</div>
+                        </div>
+                        <NumberBox :number="chunk" result="true" />
+                    </div>
+                </template>
             </div>
         </div>
     </div>
