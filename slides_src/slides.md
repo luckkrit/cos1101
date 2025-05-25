@@ -6,8 +6,8 @@ theme: seriph
 background: https://cover.sli.dev
 fonts:
     sans: Sarabun
-titleTemplate: '%s - COS1101'
-src: ./pages/chapter13_14.md#1-63
+titleTemplate: "%s - COS1101"
+src: ./pages/chapter2.md
 transition: none
 ---
 
