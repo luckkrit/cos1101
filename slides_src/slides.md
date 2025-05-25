@@ -7,7 +7,7 @@ background: https://cover.sli.dev
 fonts:
     sans: Sarabun
 titleTemplate: "%s - COS1101"
-src: ./pages/chapter2.md
+src: ./pages/chapter3.md
 transition: none
 ---
 
