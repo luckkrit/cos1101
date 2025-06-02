@@ -41,8 +41,18 @@ function extractNumberAndLetter(input: string): { valid: boolean, number: number
 
     return { valid: false, number: 0, letter: '' };
 }
+function circularLeftShift(value: number, positions = 1, bits = 8) {
+    let wrappedBits = (value >> (bits - positions)) & ((1 << positions) - 1);
+    return ((value << positions) | wrappedBits) & ((1 << bits) - 1);
+}
+// Circular Right Shift
+function circularRightShift(value: number, positions = 1, bits = 8) {
+    let wrappedBits = value & ((1 << positions) - 1);
+    return ((value >> positions) | (wrappedBits << (bits - positions))) & ((1 << bits) - 1);
+}
 const { number, letter, valid } = extractNumberAndLetter(props.mask)
 const isShift = extractNumberAndLetter(props.shift)
+const isCShift = extractNumberAndLetter(props.shift)
 let result = 0;
 let output = "";
 let input = parseInt(props.input, props.base).toString(2).padStart(8, '0');
@@ -76,11 +86,22 @@ switch (props.operation) {
     case 'SHIFTING':
         if (isShift.valid) {
             let iShift = parseInt(props.input, props.base)
-            console.log(isShift)
+            // console.log(isShift)
             if (isShift.letter === 'L') {
                 result = (iShift << isShift.number) & 0xFF;
             } else {
                 result = (iShift >> isShift.number) & 0xFF;
+            }
+            // console.log(result, props.operation)
+        }
+        break;
+    case 'CIRCULAR_SHIFTING':
+        if (isCShift.valid) {
+            let iShift = parseInt(props.input, props.base)
+            if (isCShift.letter === 'L') {
+                result = circularLeftShift(iShift, isCShift.number, 8);
+            } else {
+                result = circularRightShift(iShift, isCShift.number, 8);
             }
             // console.log(result, props.operation)
         }

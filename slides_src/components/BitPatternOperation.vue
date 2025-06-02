@@ -53,14 +53,15 @@ const inputs = props.input.split('')
     <div class="flex justify-center items-center my-3">
         <div class="flex gap-10">
             <div class="flex flex-col justify-center">
-                <div v-if="operation !== 'SHIFTING'" class="flex items-center font-bold text-xl h-10">
+                <div v-if="operation !== 'SHIFTING' && operation !== 'CIRCULAR_SHIFTING'"
+                    class="flex items-center font-bold text-xl h-10">
                     {{ operation }}
                 </div>
-                <div v-if="operation === 'SHIFTING' && shift.letter == 'L'"
+                <div v-if="operation === 'SHIFTING' || operation === 'CIRCULAR_SHIFTING' && shift.letter == 'L'"
                     class="flex items-center font-bold text-xl h-10">
                     &larr;
                 </div>
-                <div v-if="operation === 'SHIFTING' && shift.letter == 'R'"
+                <div v-if="operation === 'SHIFTING' || operation === 'CIRCULAR_SHIFTING' && shift.letter == 'R'"
                     class="flex items-center font-bold text-xl h-10">
                     &rarr;
                 </div>
@@ -68,7 +69,7 @@ const inputs = props.input.split('')
             <div class="flex flex-col">
                 <div class="flex">
                     <div class="size-10 flex justify-center items-center" v-for="(n, index) in inputs" :key="index"
-                        :class="{ 'bg-amber-700 text-white': shift.valid && operation === 'SHIFTING' && ((index < shift.number && shift.letter == 'L') || (outputs.length - index <= shift.number && shift.letter == 'R')) }">
+                        :class="{ 'bg-amber-700 text-white': shift.valid && (operation === 'SHIFTING' || operation === 'CIRCULAR_SHIFTING') && ((index < shift.number && shift.letter == 'L') || (outputs.length - index <= shift.number && shift.letter == 'R')) }">
                         {{ n }}
                     </div>
                 </div>
@@ -77,31 +78,35 @@ const inputs = props.input.split('')
                         :key="index">{{ n }}
                     </div>
                 </div>
-                <div v-if="operation !== 'SHIFTING'"
+                <div v-if="operation !== 'SHIFTING' && operation !== 'CIRCULAR_SHIFTING'"
                     class="flex text-red-500 bg-slate-400 border-t-2 border-black dark:border-white">
                     <div class="size-10 flex justify-center items-center" v-for="(n, index) in outputs"
                         :class="{ 'bg-amber-700 text-white': valid && operation === 'MASK' && ((index < number && letter == 'L') || (outputs.length - index <= number && letter == 'R')) }"
                         :key="index">{{ n }}
                     </div>
                 </div>
-                <div v-if="operation === 'SHIFTING'"
+                <div v-if="operation === 'SHIFTING' || operation === 'CIRCULAR_SHIFTING'"
                     class="flex bg-slate-400 border-t-2 border-black dark:border-white">
                     <div class="size-10 flex justify-center items-center" v-for="(n, index) in outputs"
-                        :class="{ 'text-red-500': shift.valid && operation === 'SHIFTING' && ((index < shift.number && shift.letter == 'R') || (outputs.length - index <= shift.number && shift.letter == 'L')) }"
+                        :class="{ 'text-red-500': shift.valid && (operation === 'SHIFTING' || operation === 'CIRCULAR_SHIFTING') && ((index < shift.number && shift.letter == 'R') || (outputs.length - index <= shift.number && shift.letter == 'L')) }"
                         :key="index">{{ n }}
                     </div>
                 </div>
             </div>
             <div class="flex flex-col items-center justify-evenly">
-                <div v-if="operation !== 'SHIFTING'">Input</div>
-                <div v-if="operation === 'SHIFTING'" class="flex items-center font-bold text-xl h-10">
+                <div v-if="operation !== 'SHIFTING' && operation !== 'CIRCULAR_SHIFTING'">Input</div>
+                <div v-if="operation === 'SHIFTING' || operation === 'CIRCULAR_SHIFTING'"
+                    class="flex items-center font-bold text-xl h-10">
                     Original
                 </div>
                 <div v-if="valid && operation === 'MASK'">MASK</div>
-                <div v-if="!valid && operation != 'NOT' && operation !== 'SHIFTING' && operation !== 'MASK'">Input2
+                <div
+                    v-if="!valid && operation != 'NOT' && operation !== 'SHIFTING' && operation !== 'CIRCULAR_SHIFTING' && operation !== 'MASK'">
+                    Input2
                 </div>
-                <div v-if="operation !== 'SHIFTING'">Output</div>
-                <div v-if="operation === 'SHIFTING'" class="flex items-center font-bold text-xl h-10">
+                <div v-if="operation !== 'SHIFTING' && operation !== 'CIRCULAR_SHIFTING'">Output</div>
+                <div v-if="operation === 'SHIFTING' || operation === 'CIRCULAR_SHIFTING'"
+                    class="flex items-center font-bold text-xl h-10">
                     After ship
                 </div>
             </div>

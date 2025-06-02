@@ -818,10 +818,10 @@ layout: section
 <div class="flex flex-col items-center">
 <div class="flex border border-black dark:border-white w-fit p-3">
 <div class="text-red-500">
-0
+1
 </div>
 <div>
-0011100
+1100100
 </div>
 </div>
 <div class="text-2xl py-2">Memory</div>
